@@ -1,0 +1,211 @@
+# PyShare - settings translation template.
+# Copyright (C) 2010
+# This file is distributed under the same license as the PACKAGE package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-15 09:00+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: settings.glade:7
+msgid "Configure"
+msgstr ""
+
+#: settings.glade:26
+msgid "Allow only one instance"
+msgstr ""
+
+#: settings.glade:31
+msgid ""
+"If checked there would always be only one window of PyShare. Otherwise files "
+"could be send in separete windows. This option needs DBUS"
+msgstr ""
+
+#: settings.glade:47
+msgid "Clipboard type:"
+msgstr ""
+
+#: settings.glade:58
+msgid ""
+"Clipboard - usually you can paste it using context menu, or by ctrl+v\n"
+"Primary - you can paste it using middle click"
+msgstr ""
+
+#: settings.glade:82
+msgid "General"
+msgstr ""
+
+#: settings.glade:100
+msgid "Max window height"
+msgstr ""
+
+#: settings.glade:101
+msgid "Max height:"
+msgstr ""
+
+#: settings.glade:123
+msgid "Get current"
+msgstr ""
+
+#: settings.glade:127
+msgid "sets current PyShare window height as maximum"
+msgstr ""
+
+#: settings.glade:148
+msgid "Thumbnail size:"
+msgstr ""
+
+#: settings.glade:175
+msgid "Show notifiy OSD"
+msgstr ""
+
+#: settings.glade:179
+msgid "If set notification bubble would be shown after uploads"
+msgstr ""
+
+#: settings.glade:190
+msgid "Show icon in notification area"
+msgstr ""
+
+#: settings.glade:204
+msgid "Blink icon after uploads"
+msgstr ""
+
+#: settings.glade:208
+msgid ""
+"Icon in notification area will start to blink, when uploads are completed"
+msgstr ""
+
+#: settings.glade:225
+msgid "Appearance"
+msgstr ""
+
+#: settings.glade:247
+msgid "max number of connections:"
+msgstr ""
+
+#: settings.glade:258
+msgid "Maximum number of concurent uploads"
+msgstr ""
+
+#: settings.glade:280
+msgid "use proxy"
+msgstr ""
+
+#: settings.glade:284
+msgid "if checked script will attempt to use proxy"
+msgstr ""
+
+#: settings.glade:307
+msgid "address:"
+msgstr ""
+
+#: settings.glade:337
+msgid "port:"
+msgstr ""
+
+#: settings.glade:367
+msgid "user name:"
+msgstr ""
+
+#: settings.glade:378
+msgid ""
+"leave empty if none\n"
+"When using NTLM, you can set the domain by prepending it and separating the "
+"domain and name with a forward (/) or backward slash (\\). Like this: "
+"\"domain/user\" or \"domainuser\"."
+msgstr ""
+
+#: settings.glade:399
+msgid "password:"
+msgstr ""
+
+#: settings.glade:431
+msgid "authentication type:"
+msgstr ""
+
+#: settings.glade:485
+msgid "Connections"
+msgstr ""
+
+#: settings.glade:507
+msgid "Preferred hostings"
+msgstr ""
+
+#: settings.glade:525
+msgid "hosting"
+msgstr ""
+
+#: settings.glade:531
+msgid "username"
+msgstr ""
+
+#: settings.glade:541
+msgid "password"
+msgstr ""
+
+#: settings.glade:551
+msgid "use"
+msgstr ""
+
+#: settings.glade:573
+msgid "Accounts"
+msgstr ""
+
+#: settings.glade:592
+msgid "File type:"
+msgstr ""
+
+#: settings.glade:626
+msgid "Compression:"
+msgstr ""
+
+#: settings.glade:636
+msgid ""
+"smaller\n"
+"size"
+msgstr ""
+
+#: settings.glade:660 Settings_GTK.py:371
+msgid ""
+"shorter\n"
+"time"
+msgstr ""
+
+#: settings.glade:679
+msgid "You need optipng for maximum compression."
+msgstr ""
+
+#: settings.glade:688
+msgid "Install"
+msgstr ""
+
+#: settings.glade:711
+msgid "Screenshots"
+msgstr ""
+
+#: settings.glade:730
+msgid "Reset"
+msgstr ""
+
+#: settings.glade:747
+msgid "OK"
+msgstr ""
+
+#: Settings_GTK.py:232
+msgid "Default"
+msgstr ""
+
+#: Settings_GTK.py:377
+msgid ""
+"better\n"
+"quality"
+msgstr ""

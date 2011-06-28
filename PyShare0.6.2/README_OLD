@@ -1,0 +1,24 @@
+This scripts allows you to easily upload images, screenshots, or other files and gives you links for: IM, Forums, HTML, Direct, Forums Thumbnail, HTML Thumbnail and Twitter(rapidshare gives only IM Forums and HTML)
+
+Before use: 
+1. unpack or link folder to ~/.gnome2/nautilus-scripts
+2. install python-pycurl (if not already installed)
+3. install scrot (only if you want to send screenshots, not needed for sending files)
+For best lossless compression install also optipng nad set 'filesize' to 0 in sendScreenshot.py(not advised on slow computer with fast connection, strongly advised on strong computer with slow connection)
+
+If above don't work you may need to restart nautilius
+
+sendFiles - sends selected image(s) to imageshack and other files to rapidhshare - if no file is selected shows empty window on which you can drop files. Example: http://www.youtube.com/watch?v=eupQh9ppcQI
+sendDesktopScreenshot - takes screenshot of desktop and send it to imageshack
+sendWindowScreenshot - takes screenshot of clicked window or takes screenshot of selected area(note: first run this script, then click on window/select area). Example: http://www.youtube.com/watch?v=0K_0RrzszDo
+
+You can change number of conncurent uploads, window/thumbnail size by changing values from the beginning of PyShare_GTK.py (read comments for more info). You can use imagebam in place of imageshack if you change line 89 return sendToImageshack to return sendToImagebam
+You can change compression/file type of screenshot by changing values from the beginning of sendScreenshot.py (read comments for more info)
+Errors are logged to ~/.pyshare/errorLog
+
+IF YOU WANT TO HELP:
+help with translations: https://translations.launchpad.net/pyshare/0.5
+help with artwork: http://naicik.blogspot.com/2010/02/pyshare-needs-you.html
+
+
+Imageshack, Imagebam and Rapidshare are registered trademarks. You have to agree to their TOS http://reg.imageshack.us/content.php?page=rules http://www.imagebam.com/nav/tos http://rapidshare.com/agb.html to use their services.

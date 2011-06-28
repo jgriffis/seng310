@@ -1,0 +1,27 @@
+This scripts allows you to easily upload images, screenshots, or other files and gives you links for: IM, Forums, HTML, Direct, Forums Thumbnail, HTML Thumbnail and Twitter(rapidshare gives only IM Forums and HTML)
+
+
+INSTALLATION: 
+1. unpack folder and run install.sh (It will link some of the files from unpacked folder to nautilius scripts).
+2. install python-pycurl (if not already installed)
+3. install scrot (only if you want to send screenshots, not needed for sending files)
+For best lossless screenshot compression install also optipng and set 'filesize' to 0 in configuration dialog(not advised on slow computer with fast connection, strongly advised on strong computer with slow connection)
+
+If above don't work try restarting nautilius
+
+UPDATING:
+a. overwrite old folder content with new one
+b. unpack folder anywhere and run overwrite.sh (It will overwrite link in nautilius scripts folder)
+
+
+DESCRIPTION:
+sendFiles - sends selected image(s) to imageshack and other files to rapidhshare - if no file is selected shows empty window on which you can drop files
+sendDesktopScreenshot - takes screenshot of desktop and send it to imageshack
+sendWindowScreenshot - takes screenshot of clicked window or takes screenshot of selected area(note: first run this script, then click on window/select area)
+PyShare_GTK - shows PyShare window. You can drop images on it, or take screenshot from there.
+
+
+Errors are logged to ~/.pyshare/errorLog
+
+
+Imageshack and Rapidshare are registered trademarks. You have to agree to their TOS http://reg.imageshack.us/content.php?page=rules http://rapidshare.com/agb.html to use their services.
