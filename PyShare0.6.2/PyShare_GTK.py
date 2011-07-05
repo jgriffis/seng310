@@ -437,10 +437,11 @@ class MainWindow:
         hbox.pack_start(self.vboxCopyAllLinks, False, False, 0)
         self.__copyAllLinksCombobox = None
 
-        button = gtk.Button(_("close"))
-        button.connect("clicked", self.__destroy)
-        hbox.pack_start(button, False, False, 2)
-        button.show()
+# Commented out Close button
+#        button = gtk.Button(_("close"))
+#        button.connect("clicked", self.__destroy)
+#        hbox.pack_start(button, False, False, 2)
+#        button.show()
 
 
     def setWindowSize(self):
