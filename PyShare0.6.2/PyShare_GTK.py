@@ -151,11 +151,11 @@ class MainWindow:
                         if pynotify.init("PyShare"):
                             notification = None
                             if self.__uploadsErrors == 0:
-                                notification = pynotify.Notification(_("All files have been uploaded"), _("select link from comboboxes or systray to copy it to clipboard"), "go-up")
+                                notification = pynotify.Notification(_("File(s) uploaded successfully"), _("Click the preferred link textbox to copy the file url(s) to your clipboard."), "go-up")
                             elif self.__uploadsErrors < self.__uploadsCompleted :
-                                notification = pynotify.Notification(_("Some files have not been uploaded"), _("select link from comboboxes or systray to copy it to clipboard. Try sending not-uploaded files again"), "go-up")
+                                notification = pynotify.Notification(_("Some upload(s) failed"), _("For successfully upload(s), click the preferred link textbox to copy the file url(s) to your clipboard. Please try failed upload(s) again."), "go-up")
                             else:
-                                notification = pynotify.Notification(_("Uploads failed"), _("Please try again. If error persist check if file is correct and that you have connection."), "go-up")
+                                notification = pynotify.Notification(_("Upload(s) Failed"), _("Please verify your internet connection and that the file(s) have appropriate permissions then try again."), "go-up")
                             notification.show()
                     except ImportError: pass
         finally:
@@ -317,19 +317,19 @@ class MainWindow:
             pixbuf = icon_theme.load_icon("media-record", iconSize, 0)
         except:
             pixbuf = None # it seams that some icon sets don't have some set icons
-        toolbar.insert(self.__createToolButton(pixbuf, _("Screenshot"), _("Take screenshot of of clicked window or selected area and upload it"), self.__toolButtonScreenshotClicked), 0)
+        toolbar.insert(self.__createToolButton(pixbuf, _("Screenshot"), _("Take a desktop, window, or area screenshot"), self.__toolButtonScreenshotClicked), 0)
 
         try:
             pixbuf = icon_theme.load_icon("clock", iconSize, 0)#stock_book_blue#emblem-documents
         except:
             pixbuf = None
-        toolbar.insert(self.__createToolButton(pixbuf, _("History"), _("Shows list of files that you have uploaded"), self.__toolButtonHistoryClicked), 1)
+        toolbar.insert(self.__createToolButton(pixbuf, _("History"), _("View previous uploads"), self.__toolButtonHistoryClicked), 1)
 
         try:
             pixbuf = icon_theme.load_icon("preferences-system", iconSize, 0)
         except:
             pixbuf = None
-        toolbar.insert(self.__createToolButton(pixbuf, _("Configure"), _("Customize PyShare"), self.__toolButtonSettingsClicked), 2)
+        toolbar.insert(self.__createToolButton(pixbuf, _("Configure"), _("PyShare settings"), self.__toolButtonSettingsClicked), 2)
 
         toolbar.set_style(gtk.TOOLBAR_BOTH)
         toolbar.set_show_arrow(False)
@@ -582,4 +582,5 @@ if __name__ == "__main__":
     from sys import argv
     args = argv[1:]
     uploadFilesGUI(args)
+
 
