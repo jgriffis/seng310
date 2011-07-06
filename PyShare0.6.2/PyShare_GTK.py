@@ -531,15 +531,28 @@ class MainWindow:
         align = gtk.Alignment(0.5, 0.0, 0, 0)
         scroll.add_with_viewport(align)
         align.show()
+
         self.vboxMain = gtk.VBox(False, 0)
         align.add(self.vboxMain)
         self.vboxMain.show()
         toolbar = self.__createToolbar()
         self.vboxMain.pack_start(toolbar, False, False, 0)
         toolbar.show()
+
+        label = gtk.Label("Drop files here to start upload")
+        label.set_size_request(50, 50)
+        label.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white")) 
+        eb = gtk.EventBox()
+        eb.add(label)
+        eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("grey"))
+        self.vboxMain.pack_start(eb, False, False, 20)
+        label.show()
+        eb.show()
+
         self.vboxFiles = gtk.VBox(False, 0)
         self.vboxMain.pack_start(self.vboxFiles, False, False, 0)
         self.vboxFiles.show()
+
         self.__createStatusIcon()
         self.addFiles(files, True)
 
