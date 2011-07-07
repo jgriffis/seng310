@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#/usr/bin/env sh
+#/usr/bin/env sh - do we need to use this?
 
 #this script will link PyShare_GTK, sendFiles, sendDesktopScreenshot and sendFiles
 #to nautilius script folder
