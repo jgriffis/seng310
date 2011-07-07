@@ -355,14 +355,23 @@ class MainWindow:
             vbox.pack_start(hbox, False, False, 0)
             hbox.show()
 
-            vboxSmall = gtk.VBox(False, 0)
+            #thumbnail
+            image = gtk.Image()
+            image.set_from_pixbuf(createThumbnail(file))
+            hbox.pack_start(image, False, False, 8)
+            image.show()
+
+            vboxSmall = gtk.VBox(False, 5)
             hbox.pack_start(vboxSmall, False, False, 0)
             vboxSmall.show()
-
+            
+            #filename
             label = gtk.Label(file.split('/')[-1])
+            label.set_alignment(0, 0.5)
             vboxSmall.pack_start(label, False, False, 0)
             label.show()
-
+            
+            #progress bar
             pbar = gtk.ProgressBar()
             self.__pbars.append(pbar)
             vboxSmall.pack_start(pbar, False, False, 0)
@@ -378,10 +387,7 @@ class MainWindow:
 
             vboxSmall.pack_start(comboBox, False, False, 0)
 
-            image = gtk.Image()
-            image.set_from_pixbuf(createThumbnail(file))
-            hbox.pack_start(image, False, False, 8)
-            image.show()
+            
 
             separator = gtk.HSeparator()
             vbox.pack_start(separator, False, False, 4)
@@ -523,7 +529,7 @@ class MainWindow:
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.window.set_resizable(True)
         self.window.connect("destroy", self.__destroy)
-        self.window.set_title("PyShare 0.6.2")
+        self.window.set_title("PyShare 0.6.2 - SENG310")
         self.window.set_border_width(0)
         scroll = gtk.ScrolledWindow()
         scroll.set_policy(gtk.POLICY_NEVER, gtk.POLICY_AUTOMATIC)
