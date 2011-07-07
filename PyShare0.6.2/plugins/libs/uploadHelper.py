@@ -26,8 +26,8 @@ def createLinks(fileDownloadLink, fileName = None, imageLink = None, thumbLink=N
         import os
         fileName = os.path.basename(fileName) # use only fileName, not a long path
     if imageLink:
-        links.append(imageLink) # Direct
-        types = ['IM', 'Direct']
+        links.insert(0, imageLink) # Direct
+        types = ['Direct', 'IM']
     else:
         types = ['IM']
     return links, types, [fileDownloadLink, thumbLink, imageLink]
