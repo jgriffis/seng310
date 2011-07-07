@@ -179,7 +179,7 @@ class MainWindow:
                 allLinks += link[linkType]  + "\n" # to lazy for .join ;p
         copyToClipBoard(None, allLinks)
 
-    def copyLink(self, widget, fileNumber, linkType=-1):
+    def copyLink(self, widget, fileNumber, linkType=0):
         """copies link with given fileNumber to clipboard. 
         If linkType is negative type is fetched from widget"""
         #copyToClipBoard(None, self.links[fileNumber][widget.get_active()])
