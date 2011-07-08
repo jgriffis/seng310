@@ -296,10 +296,14 @@ class History_GTK:
         self.links.append(links)
         comboBox = createCombobox(typesOfLinks)
         comboBox.connect("changed", self.copyLink, self.fileNumber)
-        comboBox.show()
+        #comboBox.show()
+	copyButton = gtk.Button(label = "Copy Link")
+	copyButton.connect("clicked", self.copyLink, self.fileNumber, 0)
+	copyButton.show()        
         self.fileNumber += 1
 
-        table.attach(comboBox, 1, 2, 3, 4)
+        table.attach(copyButton, 1, 2, 3, 4)
+        #table.attach(comboBox, 1, 2, 3, 4)
 
 
         toolButton = gtk.ToolButton(gtk.STOCK_REMOVE)
