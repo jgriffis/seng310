@@ -29,17 +29,17 @@ def createLinks(fileDownloadLink, fileName = None, imageLink = None, thumbLink=N
         links.append("[URL=" + fileDownloadLink + "][IMG]" + imageLink + "[/IMG][/URL]") # Forum
         links.append("[URL=" + fileDownloadLink + "][IMG=" + imageLink + "][/IMG][/URL]") # Alt Forum
         links.append("<a target='_blank' href='" + fileDownloadLink + "'><img src='" + imageLink + "' border='0'/></a>") # HTML
-        links.append(imageLink) # Direct
+        links.insert(0, imageLink) # Direct
         if not thumbLink:
             thumbLink = imageLink # thumb was not generated, use image as a thumb
         links.append( "[URL=" + fileDownloadLink + "][IMG]" + thumbLink + "[/IMG][/URL]" ) # Forum Thumb
         links.append( "[URL=" + fileDownloadLink + "][IMG=" + thumbLink + "][/IMG][/URL]" ) # Alt Forum Thumb
         links.append( "'<a target='_blank' href='" + fileDownloadLink + "'><img src='" + thumbLink + "' border='0'/></a>" ) # HTML Thumb
         links.append("http://yfrog.com/?url=" + imageLink) # Twitter Link
-        types = ['IM', 'Forum', 'Alt Forum', 'HTML', 'Direct', 'Forum Thumb', 'Alt Forum Thumb', 'HTML Thumb', 'Twitter Link']
+        types = ['Direct', 'Web', 'Forum', 'Alt Forum', 'HTML', 'Forum Thumb', 'Alt Forum Thumb', 'HTML Thumb', 'Twitter Link']
     else:
         links.append("[URL=" + fileDownloadLink + "]" + fileName + "[/URL]") # Forum
         links.append("[URL=" + fileDownloadLink + "]" + fileName + "[/URL]") # Alt Forum
         links.append("<a target='_blank' href='" + fileDownloadLink + "'>" + fileName + "</a>") # HTML
-        types = ['IM', 'Forum', 'Alt Forum', 'HTML']
+        types = ['Web', 'Forum', 'Alt Forum', 'HTML']
     return links, types, [fileDownloadLink, thumbLink, imageLink]
