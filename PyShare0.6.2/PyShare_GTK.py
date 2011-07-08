@@ -179,7 +179,7 @@ class MainWindow:
                 allLinks += link[linkType]  + "\n" # to lazy for .join ;p
         copyToClipBoard(None, allLinks)
 
-    def copyLink(self, widget, fileNumber, linkType=0):
+    def copyLink(self, widget, fileNumber, linkType=-1):
         """copies link with given fileNumber to clipboard. 
         If linkType is negative type is fetched from widget"""
         #copyToClipBoard(None, self.links[fileNumber][widget.get_active()])
@@ -382,10 +382,15 @@ class MainWindow:
             self.links.append([])
             comboBox.connect("changed", self.copyLink, totalNumberOfFiles)
             comboBox.connect("notify::popup-shown", self.__windowClicked)
-            comboBox.show() # "show" comboboxes to make windows size calculation precise(comboboxes will be hidden again before window will be desplayed)
+            #comboBox.show() # "show" comboboxes to make windows size calculation precise(comboboxes will be hidden again before window will be desplayed)
             self.__comboBoxes.append(comboBox)
+            copyButton = gtk.Button(label = "Copy Link")
+            copyButton.connect("clicked", self.copyLink, totalNumberOfFiles, 0)
+            copyButton.show()
+            
 
-            vboxSmall.pack_start(comboBox, False, False, 0)
+            #vboxSmall.pack_start(comboBox, False, False, 0)
+            vboxSmall.pack_start(copyButton, False, False, 0)
 
             
 
