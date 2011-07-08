@@ -187,7 +187,7 @@ class MainWindow:
             linkType = widget.get_active() #get selected combo box item
         copyToClipBoard(None, self.links[fileNumber][linkType])
         self.__pbars[fileNumber].set_text(_("copied to clipboard")) #somehow don't want to work with gtk lock, but works without it, no thread read from __pbars so that shouldn't be important
-        self.__pbars[fileNumber].modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#6495ed"))
+        self.__pbars[fileNumber].modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.Color("#6495ed"))
 
     def __statusIconClicked(self, icon):
         """hides or shows window to notification area, and turns off icon blinking"""
@@ -538,6 +538,13 @@ class MainWindow:
         align = gtk.Alignment(0.5, 0.0, 0, 0)
         scroll.add_with_viewport(align)
         align.show()
+        
+        #set up progress bar styles
+        normal = gtk.Style()
+        
+        
+        highlight = gtk.Style()
+        
         
         self.vboxMain = gtk.VBox(False, 0)
         align.add(self.vboxMain)
