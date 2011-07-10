@@ -423,16 +423,22 @@ class MainWindow:
     def __createCopyAllLinks(self):
         if self.__copyAllLinksCombobox:
             self.__copyAllLinksCombobox.destroy()
-        else:
-            label = gtk.Label(_("All files:"))
-            self.vboxCopyAllLinks.pack_start(label, False, False, 0)
-            label.show()
+        #else:
+        #    label = gtk.Label(_("All files:"))
+        #    self.vboxCopyAllLinks.pack_start(label, False, False, 0)
+        #    label.show()
+            
+        copyAllButton = gtk.Button(label = "Copy All Links")
+        copyAllButton.connect("clicked", self.copyAllLinks, 0)
+        copyAllButton.show()
+        self.vboxCopyAllLinks.pack_start(copyAllButton, False, False, 0)
+        
         comboBox = createCombobox(self.__commonLinkNames)
         comboBox.connect("changed", self.copyAllLinks)
         comboBox.connect("notify::popup-shown", self.__windowClicked)
-        self.vboxCopyAllLinks.pack_start(comboBox, False, False, 0)
-        comboBox.show()
-        self.__copyAllLinksCombobox = comboBox
+        #self.vboxCopyAllLinks.pack_start(comboBox, False, False, 0)
+        #comboBox.show()
+        self.__copyAllLinksCombobox = copyAllButton
         self.vboxCopyAllLinks.show()
 
     def __addFooter(self):
