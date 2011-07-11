@@ -16,6 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import pango
 
 def importErrorDialog(txt):
     """shows basic error dialog with given text and than calls sys.exit
@@ -367,6 +368,7 @@ class MainWindow:
             
             #filename
             label = gtk.Label(file.split('/')[-1])
+	    label.set_ellipsize(pango.ELLIPSIZE_MIDDLE)
             label.set_alignment(0, 0.5)
             vboxSmall.pack_start(label, False, False, 0)
             label.show()
