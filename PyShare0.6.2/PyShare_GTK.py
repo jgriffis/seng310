@@ -201,7 +201,7 @@ class MainWindow:
 	"""Cancels the file upload, changes the upload status on the progress bar and the color to dark gray"""
 	if not self.__cancelled[fileNumber]:
 		self.__cancelled[fileNumber] = 1
-		self.__pbars[fileNumber].set_text(_(""))
+		self.__pbars[fileNumber].set_text("")
 		self.__pbars[fileNumber].modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#696969"))
 		self.__cancelUploadButton[fileNumber].set_label("Cancelling")
 
@@ -531,7 +531,8 @@ class MainWindow:
 	"""Callback function invoked when download/upload has progress.
         sets fraction and text on progresbar with given fileNumber"""
         if self.__cancelled[fileNumber]:
-        	return
+             self.__pbars[fileNumber].set_text("")
+             return
         if upload_t != 0:
             prog = upload_d / upload_t
             try: # rather not needed
