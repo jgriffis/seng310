@@ -93,6 +93,7 @@ def showDialog(parent, description, title='PyShare dialog'):
 class MainWindow:
     __cancelUploadButton = []
     __cancelled = []
+    __cancelledLabel = []
     __cplinkButton = []
     __pbars = []
     __comboBoxes = []
@@ -120,7 +121,8 @@ class MainWindow:
     	self.__uploadsCompletedLock.acquire()
     	self.__uploadsErrors += 1
     	self.__uploadsCompletedLock.release()
-    	self.__cancelUploadButton[fileNumber].set_label("Cancelled")
+    	self.__cancelUploadButton[fileNumber].hide()
+    	self.__cancelledLabel[fileNumber].show()
 
     def __fileUploadEnded(self, fileNumber, errorOccured, imageLinks=None,file=""):
         """if upload was successfull than attaches imageLinks to combobox with given fileNumber and shows it
@@ -420,11 +422,11 @@ class MainWindow:
             #comboBox.show() # "show" comboboxes to make windows size calculation precise(comboboxes will be hidden again before window will be desplayed)
             self.__comboBoxes.append(comboBox)
 
-	    #Copy Link button - hidden by default
+	    #Copy Link button - not displayed until upload finished
             copyButton = gtk.Button(label = "Copy Link")
             copyButton.connect("clicked", self.copyLink, totalNumberOfFiles, 0)
 	    self.__cplinkButton.append(copyButton)
-            #copyButton.show()
+            vboxSmall.pack_start(copyButton, False, False, 0)
             
 	    # Cancel upload button
 	    cancelButton = gtk.Button(label = "Cancel")
@@ -434,8 +436,19 @@ class MainWindow:
 	    vboxSmall.pack_start(cancelButton, False, False, 0)
 	    cancelButton.show()
 
+	    label = gtk.Label("Cancelled")
+	    label.set_size_request(25, 25)
+	    label.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white")) 
+	    eb = gtk.EventBox()
+	    eb.add(label)
+	    eb.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("grey"))
+	    self.__cancelledLabel.append(eb)
+	    vboxSmall.pack_start(eb, False, False, 0)
+	    label.show()
+	    #eb.show()
+
+
             #vboxSmall.pack_start(comboBox, False, False, 0)
-            vboxSmall.pack_start(copyButton, False, False, 0)
 
             separator = gtk.HSeparator()
             vbox.pack_start(separator, False, False, 4)
