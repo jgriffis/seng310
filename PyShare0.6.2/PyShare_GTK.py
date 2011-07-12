@@ -91,6 +91,8 @@ def showDialog(parent, description, title='PyShare dialog'):
     parent.dialog.destroy()
 
 class MainWindow:
+    __cancelUploadButton = []
+    __cplinkButton = []
     __pbars = []
     __comboBoxes = []
     links = []
@@ -116,6 +118,10 @@ class MainWindow:
         """if upload was successfull than attaches imageLinks to combobox with given fileNumber and shows it
         otherwise it sets proggressbar message to indicate upload failure
         imageLinks and file are ignored if errorOccured is True"""
+	# First, hide 'Cancel' button
+	cancelbutton = self.__cancelUploadButton[fileNumber]
+	cancelbutton.hide()
+
         if not errorOccured:
             self.links[fileNumber] = imageLinks[0] # there is one thread per file so this should be thread safe
             db.addFile(getUploader(file).NAME, imageLinks[2][0], imageLinks[2][1], imageLinks[2][2], os.path.basename(file), os.path.getsize(file),file.split('.')[-1].lower(), getMimeTypes(file))
@@ -132,9 +138,14 @@ class MainWindow:
             gtk.gdk.threads_enter()
             if errorOccured:
                 self.__pbars[fileNumber].set_text(_("upload failed"))
+		
             else:
                 self.__pbars[fileNumber].set_text(_("upload completed"))
-                combobox = self.__comboBoxes[fileNumber]
+		# Upload has succeeded, we allow 'Copy Link' button to show
+		copybutton = self.__cplinkButton[fileNumber]
+		copybutton.show()
+               
+		combobox = self.__comboBoxes[fileNumber]
                 linkTypes = imageLinks[1]
                 populateCombobox(combobox, linkTypes)
                 combobox.show()
@@ -169,6 +180,13 @@ class MainWindow:
     def fileUploadFailed(self,fileNumber):
         """sets proggressbar message to indicate upload failure"""
         self.__fileUploadEnded(fileNumber, True)
+   
+# NEW - Cancel file upload Incomplete!
+# TODO - Need to actually cancel the upload/thread...
+    def cancelUpload(self, widget, fileNumber, linkType=-1):
+	"""Cancels the file upload, changes the upload status on the progress bar and the color to dark gray"""
+	self.__pbars[fileNumber].set_text(_("upload cancelled"))
+	self.__pbars[fileNumber].modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#696969"))
 
     def copyAllLinks(self, widget, linkType=-1):
         """copies all links with selected widget type to clipboard"""
@@ -386,15 +404,22 @@ class MainWindow:
             comboBox.connect("notify::popup-shown", self.__windowClicked)
             #comboBox.show() # "show" comboboxes to make windows size calculation precise(comboboxes will be hidden again before window will be desplayed)
             self.__comboBoxes.append(comboBox)
+
+	    #Copy Link button - hidden by default
             copyButton = gtk.Button(label = "Copy Link")
             copyButton.connect("clicked", self.copyLink, totalNumberOfFiles, 0)
-            copyButton.show()
+	    self.__cplinkButton.append(copyButton)
+            #copyButton.show()
             
+	    # Cancel upload button
+	    cancelButton = gtk.Button(label = "Cancel")
+            cancelButton.connect("clicked", self.cancelUpload, totalNumberOfFiles, 0)
+	    self.__cancelUploadButton.append(cancelButton)
+	    vboxSmall.pack_start(cancelButton, False, False, 0)
+	    cancelButton.show()
 
             #vboxSmall.pack_start(comboBox, False, False, 0)
             vboxSmall.pack_start(copyButton, False, False, 0)
-
-            
 
             separator = gtk.HSeparator()
             vbox.pack_start(separator, False, False, 4)
