@@ -92,6 +92,7 @@ def showDialog(parent, description, title='PyShare dialog'):
 
 class MainWindow:
     __cancelUploadButton = []
+    __cancelled = []
     __cplinkButton = []
     __pbars = []
     __comboBoxes = []
@@ -114,10 +115,21 @@ class MainWindow:
     def __windowClicked(self, widget=None, data=None):
         self.__statusIcon.set_blinking(False)
 
+    def __fileUploadCancelled(self, fileNumber):
+    	#self.__pbars[fileNumber].set_text(_("upload cancelled"))
+    	self.__uploadsCompletedLock.acquire()
+    	self.__uploadsErrors += 1
+    	self.__uploadsCompletedLock.release()
+    	self.__cancelUploadButton[fileNumber].set_label("Cancelled")
+
     def __fileUploadEnded(self, fileNumber, errorOccured, imageLinks=None,file=""):
         """if upload was successfull than attaches imageLinks to combobox with given fileNumber and shows it
         otherwise it sets proggressbar message to indicate upload failure
         imageLinks and file are ignored if errorOccured is True"""
+	if self.__cancelled[fileNumber]:
+		self.__fileUploadCancelled(fileNumber)
+		return
+	
 	# First, hide 'Cancel' button
 	cancelbutton = self.__cancelUploadButton[fileNumber]
 	cancelbutton.hide()
@@ -183,10 +195,13 @@ class MainWindow:
    
 # NEW - Cancel file upload Incomplete!
 # TODO - Need to actually cancel the upload/thread...
-    def cancelUpload(self, widget, fileNumber, linkType=-1):
+    def cancelUpload(self, widget, fileNumber):
 	"""Cancels the file upload, changes the upload status on the progress bar and the color to dark gray"""
-	self.__pbars[fileNumber].set_text(_("upload cancelled"))
-	self.__pbars[fileNumber].modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#696969"))
+	if not self.__cancelled[fileNumber]:
+		self.__cancelled[fileNumber] = 1
+		self.__pbars[fileNumber].set_text(_(""))
+		self.__pbars[fileNumber].modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#696969"))
+		self.__cancelUploadButton[fileNumber].set_label("Cancelling")
 
     def copyAllLinks(self, widget, linkType=-1):
         """copies all links with selected widget type to clipboard"""
@@ -413,8 +428,9 @@ class MainWindow:
             
 	    # Cancel upload button
 	    cancelButton = gtk.Button(label = "Cancel")
-            cancelButton.connect("clicked", self.cancelUpload, totalNumberOfFiles, 0)
+            cancelButton.connect("clicked", self.cancelUpload, totalNumberOfFiles)
 	    self.__cancelUploadButton.append(cancelButton)
+	    self.__cancelled.append(0)
 	    vboxSmall.pack_start(cancelButton, False, False, 0)
 	    cancelButton.show()
 
@@ -504,6 +520,8 @@ class MainWindow:
     def progress(self, fileNumber, download_t=0, download_d=0, upload_t=0.5, upload_d=1):
 	"""Callback function invoked when download/upload has progress.
         sets fraction and text on progresbar with given fileNumber"""
+        if self.__cancelled[fileNumber]:
+        	return
         if upload_t != 0:
             prog = upload_d / upload_t
             try: # rather not needed
