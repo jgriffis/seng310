@@ -435,7 +435,8 @@ class MainWindow:
 	    self.__cancelled.append(0)
 	    vboxSmall.pack_start(cancelButton, False, False, 0)
 	    cancelButton.show()
-
+	    
+	    #cancel label to appear after upload cancelled
 	    label = gtk.Label("Cancelled")
 	    label.set_size_request(25, 25)
 	    label.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white")) 
@@ -445,10 +446,6 @@ class MainWindow:
 	    self.__cancelledLabel.append(eb)
 	    vboxSmall.pack_start(eb, False, False, 0)
 	    label.show()
-	    #eb.show()
-
-
-            #vboxSmall.pack_start(comboBox, False, False, 0)
 
             separator = gtk.HSeparator()
             vbox.pack_start(separator, False, False, 4)
