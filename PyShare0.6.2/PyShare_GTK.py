@@ -123,7 +123,7 @@ class MainWindow:
     	self.__uploadsCompletedLock.release()
     	self.__cancelUploadButton[fileNumber].hide()
     	self.__cancelledLabel[fileNumber].show()
-
+	self.__pbars[fileNumber].hide()
     def __fileUploadEnded(self, fileNumber, errorOccured, imageLinks=None,file=""):
         """if upload was successfull than attaches imageLinks to combobox with given fileNumber and shows it
         otherwise it sets proggressbar message to indicate upload failure
@@ -201,9 +201,16 @@ class MainWindow:
 	"""Cancels the file upload, changes the upload status on the progress bar and the color to dark gray"""
 	if not self.__cancelled[fileNumber]:
 		self.__cancelled[fileNumber] = 1
-		self.__pbars[fileNumber].set_text("")
-		self.__pbars[fileNumber].modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#696969"))
+		pbar = self.__pbars[fileNumber]
+		pbar.set_text("")
+		pbar.modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#696969")) # does not work with themeing engines
 		self.__cancelUploadButton[fileNumber].set_label("Cancelling")
+		
+		# this is supposed to override themeing engine colours... but doesn't
+		colour = gtk.gdk.color_parse("#696969")		
+		style = pbar.get_style().copy()
+		style.bg[gtk.STATE_PRELIGHT] = colour
+		pbar.set_style(style)
 
     def copyAllLinks(self, widget, linkType=-1):
         """copies all links with selected widget type to clipboard"""
@@ -438,7 +445,7 @@ class MainWindow:
 	    
 	    #cancel label to appear after upload cancelled
 	    label = gtk.Label("Cancelled")
-	    label.set_size_request(25, 25)
+	    label.set_size_request(150, 50)
 	    label.modify_bg(gtk.STATE_NORMAL, gtk.gdk.color_parse("white")) 
 	    eb = gtk.EventBox()
 	    eb.add(label)
