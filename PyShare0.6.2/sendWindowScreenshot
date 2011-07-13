@@ -17,4 +17,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import sendScreenshot
+import pynotify
+notification = pynotify.Notification(_("Window Screenshot"), _("Click on a window to take a picture of that window.\n -or- \nClick on the desktop to capture desktop."), "go-up")
+notification.show()
 sendScreenshot.sendScreenshot(True)

@@ -326,6 +326,9 @@ class MainWindow:
         try:
             #TODO: ask about screenshot type
             #TODO: use plugin wrapper to run in diffrent thread
+	    import pynotify
+	    notification = pynotify.Notification(_("Window Screenshot"), _("Click on a window to take a picture of that window.\n -or- \nClick on the desktop to capture desktop."), "go-up")
+	    notification.show()
             screenshotPath = getScreenshot(True)
             self.addFiles([screenshotPath,])
         except Exception, e:
@@ -391,6 +394,15 @@ class MainWindow:
             hbox = gtk.HBox(False, 0)
             vbox.pack_start(hbox, False, False, 0)
             hbox.show()
+
+	    from stat import *
+	    st = os.stat(file)
+	    if (st[ST_SIZE] > 5000000):
+		from subprocess import Popen
+		proc=Popen("zenity --question --text='File may be to large to transfer. Continue?'", shell=True )
+		proc.communicate()
+		if proc.returncode:
+		    break
 
             #thumbnail
             image = gtk.Image()
