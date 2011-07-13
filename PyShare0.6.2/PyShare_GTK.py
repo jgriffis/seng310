@@ -177,9 +177,9 @@ class MainWindow:
                         if pynotify.init("PyShare"):
                             notification = None
                             if self.__uploadsErrors == 0:
-                                notification = pynotify.Notification(_("File(s) uploaded successfully"), _("Click the preferred link textbox to copy the file url(s) to your clipboard."), "go-up")
+                                notification = pynotify.Notification(_("File(s) uploaded successfully"), _("Click the Copy Link button to copy the file url(s) to your clipboard."), "go-up")
                             elif self.__uploadsErrors < self.__uploadsCompleted :
-                                notification = pynotify.Notification(_("Some upload(s) failed"), _("For successfully upload(s), click the preferred link textbox to copy the file url(s) to your clipboard. Please try failed upload(s) again."), "go-up")
+                                notification = pynotify.Notification(_("Some upload(s) failed"), _("For successfully upload(s), click the Copy Link button to copy the file url(s) to your clipboard. Please try failed upload(s) again."), "go-up")
                             else:
                                 notification = pynotify.Notification(_("Upload(s) Failed"), _("Please verify your internet connection and that the file(s) have appropriate permissions then try again."), "go-up")
                             notification.show()
