@@ -205,12 +205,6 @@ class MainWindow:
 		pbar.set_text("")
 		pbar.modify_bg(gtk.STATE_PRELIGHT, gtk.gdk.color_parse("#696969")) # does not work with themeing engines
 		self.__cancelUploadButton[fileNumber].set_label("Cancelling")
-		
-		# this is supposed to override themeing engine colours... but doesn't
-		colour = gtk.gdk.color_parse("#696969")		
-		style = pbar.get_style().copy()
-		style.bg[gtk.STATE_PRELIGHT] = colour
-		pbar.set_style(style)
 
     def copyAllLinks(self, widget, linkType=-1):
         """copies all links with selected widget type to clipboard"""
@@ -611,14 +605,7 @@ class MainWindow:
         scroll.show()
         align = gtk.Alignment(0.5, 0.0, 0, 0)
         scroll.add_with_viewport(align)
-        align.show()
-        
-        #set up progress bar styles
-        normal = gtk.Style()
-        
-        
-        highlight = gtk.Style()
-        
+        align.show()       
         
         self.vboxMain = gtk.VBox(False, 0)
         align.add(self.vboxMain)
